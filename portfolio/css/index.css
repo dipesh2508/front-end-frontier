@@ -55,6 +55,14 @@ button {
     font-size: 1.2rem;
 }
 
+/* about */
+
+#about-experience{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
 /* project  */
 .project-image{
     width: 16rem;
