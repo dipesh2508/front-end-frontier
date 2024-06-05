@@ -602,6 +602,16 @@ body {
   line-height: 1.25rem;
 }
 
+.card{
+  border-radius: 0.75rem;
+  border-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(214 212 212 / var(--tw-border-opacity));
+  --tw-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --tw-shadow-colored: inset 0 2px 4px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .sr-only{
   position: absolute;
   width: 1px;
@@ -705,6 +715,10 @@ body {
   grid-column: span 1 / span 1;
 }
 
+.col-span-11{
+  grid-column: span 11 / span 11;
+}
+
 .col-span-4{
   grid-column: span 4 / span 4;
 }
@@ -776,6 +790,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.-mt-6{
+  margin-top: -1.5rem;
+}
+
+.mt-10{
+  margin-top: 2.5rem;
+}
+
 .mt-16{
   margin-top: 4rem;
 }
@@ -790,6 +812,22 @@ body {
 
 .mt-36{
   margin-top: 9rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
+}
+
+.mt-4{
+  margin-top: 1rem;
+}
+
+.-mt-2{
+  margin-top: -0.5rem;
+}
+
+.mt-12{
+  margin-top: 3rem;
 }
 
 .box-border{
@@ -895,9 +933,9 @@ body {
   display: none;
 }
 
-.size-24{
-  width: 6rem;
-  height: 6rem;
+.size-16{
+  width: 4rem;
+  height: 4rem;
 }
 
 .h-0{
@@ -924,6 +962,18 @@ body {
   height: 1.5rem;
 }
 
+.h-\[90vh\]{
+  height: 90vh;
+}
+
+.h-\[44\.75rem\]{
+  height: 44.75rem;
+}
+
+.h-\[40rem\]{
+  height: 40rem;
+}
+
 .w-1{
   width: 0.25rem;
 }
@@ -936,12 +986,8 @@ body {
   width: 12rem;
 }
 
-.w-64{
-  width: 16rem;
-}
-
-.w-\[16\.2rem\]{
-  width: 16.2rem;
+.w-52{
+  width: 13rem;
 }
 
 .w-\[this-is\\\\\]{
@@ -1299,8 +1345,8 @@ body {
   grid-auto-flow: column dense;
 }
 
-.grid-cols-1{
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+.grid-cols-12{
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
 .grid-cols-2{
@@ -1313,6 +1359,14 @@ body {
 
 .grid-cols-5{
   grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.grid-cols-6{
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-row{
@@ -1503,12 +1557,20 @@ body {
   gap: 0.25rem;
 }
 
-.gap-12{
-  gap: 3rem;
+.gap-1\.5{
+  gap: 0.375rem;
+}
+
+.gap-11{
+  gap: 2.75rem;
 }
 
 .gap-16{
   gap: 4rem;
+}
+
+.gap-24{
+  gap: 6rem;
 }
 
 .gap-3{
@@ -1851,6 +1913,10 @@ body {
   border-radius: 0.125rem;
 }
 
+.rounded-xl{
+  border-radius: 0.75rem;
+}
+
 .rounded-b{
   border-bottom-right-radius: 0.25rem;
   border-bottom-left-radius: 0.25rem;
@@ -1925,6 +1991,10 @@ body {
 
 .border{
   border-width: 1px;
+}
+
+.border-2{
+  border-width: 2px;
 }
 
 .border-x{
@@ -2018,6 +2088,11 @@ body {
 .bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-black{
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .decoration-slice{
@@ -2134,6 +2209,10 @@ body {
   padding: 0.25rem;
 }
 
+.p-8{
+  padding: 2rem;
+}
+
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -2144,14 +2223,9 @@ body {
   padding-right: 3rem;
 }
 
-.px-28{
-  padding-left: 7rem;
-  padding-right: 7rem;
-}
-
-.px-6{
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+.px-36{
+  padding-left: 9rem;
+  padding-right: 9rem;
 }
 
 .px-4{
@@ -2159,21 +2233,59 @@ body {
   padding-right: 1rem;
 }
 
+.px-40{
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.px-48{
+  padding-left: 12rem;
+  padding-right: 12rem;
+}
+
+.px-6{
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.px-64{
+  padding-left: 16rem;
+  padding-right: 16rem;
+}
+
+.py-1{
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
 .px-8{
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
-.pl-16{
+.px-16{
   padding-left: 4rem;
+  padding-right: 4rem;
 }
 
-.pr-12{
-  padding-right: 3rem;
+.pl-10{
+  padding-left: 2.5rem;
+}
+
+.pr-6{
+  padding-right: 1.5rem;
 }
 
 .pt-4{
   padding-top: 1rem;
+}
+
+.pt-8{
+  padding-top: 2rem;
+}
+
+.pt-2{
+  padding-top: 0.5rem;
 }
 
 .text-left{
@@ -2237,6 +2349,11 @@ body {
   line-height: 2rem;
 }
 
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
 .text-5xl{
   font-size: 3rem;
   line-height: 1;
@@ -2252,9 +2369,9 @@ body {
   line-height: 1.75rem;
 }
 
-.text-xl{
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.text-sm{
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .text-xs{
@@ -2262,9 +2379,9 @@ body {
   line-height: 1rem;
 }
 
-.text-sm{
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.text-xl{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-bold{
@@ -2355,28 +2472,36 @@ body {
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
 }
 
-.leading-7{
-  line-height: 1.75rem;
-}
-
-.leading-\[4rem\]{
-  line-height: 4rem;
-}
-
-.leading-loose{
-  line-height: 2;
+.leading-10{
+  line-height: 2.5rem;
 }
 
 .leading-4{
   line-height: 1rem;
 }
 
-.leading-8{
-  line-height: 2rem;
-}
-
 .leading-6{
   line-height: 1.5rem;
+}
+
+.leading-7{
+  line-height: 1.75rem;
+}
+
+.leading-\[3\.75rem\]{
+  line-height: 3.75rem;
+}
+
+.leading-loose{
+  line-height: 2;
+}
+
+.leading-normal{
+  line-height: 1.5;
+}
+
+.leading-\[3rem\]{
+  line-height: 3rem;
 }
 
 .text-\[\#336699\]\/\[\.35\]{
@@ -2887,6 +3012,10 @@ body {
     grid-column: span 7 / span 7;
   }
 
+  .md\:mt-36{
+    margin-top: 9rem;
+  }
+
   .md\:inline-block{
     display: inline-block;
   }
@@ -2899,12 +3028,21 @@ body {
     display: grid;
   }
 
-  .md\:grid-cols-12{
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+  .md\:size-24{
+    width: 6rem;
+    height: 6rem;
   }
 
-  .md\:grid-cols-4{
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .md\:w-64{
+    width: 16rem;
+  }
+
+  .md\:w-\[16\.2rem\]{
+    width: 16.2rem;
+  }
+
+  .md\:grid-cols-12{
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 
   .md\:grid-cols-2{
@@ -2913,6 +3051,10 @@ body {
 
   .md\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\:flex-row{
@@ -2927,18 +3069,16 @@ body {
     gap: 0px;
   }
 
+  .md\:gap-12{
+    gap: 3rem;
+  }
+
   .md\:gap-8{
     gap: 2rem;
   }
 
-  .md\:px-32{
-    padding-left: 8rem;
-    padding-right: 8rem;
-  }
-
-  .md\:px-12{
-    padding-left: 3rem;
-    padding-right: 3rem;
+  .md\:gap-24{
+    gap: 6rem;
   }
 
   .md\:px-0{
@@ -2946,7 +3086,33 @@ body {
     padding-right: 0px;
   }
 
-  .md\:pr-48{
+  .md\:px-28{
+    padding-left: 7rem;
+    padding-right: 7rem;
+  }
+
+  .md\:px-32{
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .md\:px-36{
+    padding-left: 9rem;
+    padding-right: 9rem;
+  }
+
+  .md\:px-64{
+    padding-left: 16rem;
+    padding-right: 16rem;
+  }
+
+  .md\:px-40{
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+
+  .md\:px-48{
+    padding-left: 12rem;
     padding-right: 12rem;
   }
 
@@ -2958,8 +3124,25 @@ body {
     padding-right: 3rem;
   }
 
+  .md\:pr-48{
+    padding-right: 12rem;
+  }
+
+  .md\:pt-8{
+    padding-top: 2rem;
+  }
+
+  .md\:pl-10{
+    padding-left: 2.5rem;
+  }
+
   .md\:text-left{
     text-align: left;
+  }
+
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .md\:text-6xl{
@@ -2977,9 +3160,19 @@ body {
     line-height: 1.75rem;
   }
 
-  .md\:text-5xl{
-    font-size: 3rem;
-    line-height: 1;
+  .md\:text-xl{
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .md\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:leading-\[4\.5rem\]{
@@ -2992,6 +3185,14 @@ body {
 
   .md\:leading-loose{
     line-height: 2;
+  }
+
+  .md\:leading-\[3\.75rem\]{
+    line-height: 3.75rem;
+  }
+
+  .md\:leading-10{
+    line-height: 2.5rem;
   }
 }
 

@@ -13,4 +13,8 @@
     .btn {
         @apply rounded-md p-3 border text-sm;
     }
+
+    .card{
+        @apply rounded-xl border-2 border-disabled shadow-inner;
+    }
 }
