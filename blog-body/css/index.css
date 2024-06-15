@@ -1,7 +1,25 @@
+:root{
+  --background-color: rgb(255, 254, 251);
+  --header-color: antiquewhite;
+  --nav-color: rgb(255, 255, 255);
+  --heading-color: black;
+  --text-color: rgb(62, 62, 62);
+  --toggle-color: rgb(242, 191, 103);
+}
+
+.dark{
+  --background-color: #352F44;
+  --header-color: #5C5470;
+  --nav-color: #352f44;
+  --heading-color: #B9B4C7;
+  --text-color: #B9B4C7;
+}
+
 body {
   padding: 0;
   margin: 0;
-  background-color: rgb(255, 254, 251);
+  background-color: var(--background-color);
+  transition: all 0.4s linear;
 }
 
 header {
@@ -9,12 +27,12 @@ header {
   flex-direction: row;
   max-width: 100%;
   padding: 2rem 4rem 1rem 1rem;
-  background-color: antiquewhite;
+  background-color: var(--header-color);
 }
 
 a{
   text-decoration: none;
-  color: black;
+  color: var(--heading-color);
 }
 
 .header-image-container {
@@ -41,12 +59,13 @@ a{
 }
 
 .nav-items:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--nav-color);
   cursor: pointer;
 }
 
 p {
   margin-right: 4rem;
+  color: var(--heading-color);
 }
 
 main {
@@ -63,6 +82,7 @@ article {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: var(--heading-color);
 }
 
 section {
@@ -71,7 +91,7 @@ section {
   max-width: 100%;
   align-items: center;
   justify-content: center;
-    gap: 2rem;
+  gap: 2rem;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: auto;
 }
@@ -82,6 +102,8 @@ h1 {
 
 h2 {
   grid-column: span 4/4;
+  color: var(--heading-color);
+  margin-top: 4rem;
 }
 
 .blog-image {
@@ -101,9 +123,50 @@ p {
 .content {
   font-size: 1.1rem;
   line-height: 1.5;
-  color: rgb(62, 62, 62);
+  color: var(--text-color);
   grid-column: span 3;
 }
+
+/* toggle  */
+
+.container {
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+
+
+.switch {
+  display: inline-block;
+  font-size: 20px;
+  height: 1em;
+  width: 2em;
+  background: var(--nav-color);
+  border-radius: 1em;
+}
+
+.switch div {
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  background: var(--toggle-color);
+  box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+  -webkit-transition: all 300ms;
+     -moz-transition: all 300ms;
+          transition: all 300ms;
+}
+
+.switch input:checked + div {
+  -webkit-transform: translate3d(100%, 0, 0);
+     -moz-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+}
+
 
 
 /* responsive */
@@ -125,7 +188,6 @@ p {
   }
 
   .nav-items:hover {
-    background-color: rgb(255, 255, 255);
     cursor: pointer;
   }
 
