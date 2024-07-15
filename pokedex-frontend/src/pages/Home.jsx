@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import Card from "../components/ui/Card";
 function Home() {
   const [pokemonList, setPokemonList] = useState([]);
 
@@ -18,19 +18,15 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-4">Pokédex</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="py-2 flex flex-col gap-2">
+      <h1 className="text-3xl font-bold mb-4 text-center">Pokédex</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-4">
         {pokemonList.map((pokemon) => (
           <Link
             to={`/pokemon/${pokemon.details.id}`}
             key={pokemon.details.id}
-            className="p-4 border rounded-lg hover:bg-gray-100"
           >
-            <img src={pokemon.details.image} alt={pokemon.name} />
-            <h2 className="text-xl font-semibold">{pokemon.name}</h2>
-            <p>Pokedex No: {pokemon.details.id}</p>
-            <p>Type: {pokemon.details.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+            <Card pokemon={pokemon} />
           </Link>
         ))}
       </div>

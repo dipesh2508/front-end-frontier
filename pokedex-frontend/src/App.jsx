@@ -4,7 +4,7 @@ import PokemonDetail from "./pages/PokemonDetail";
 
 function App() {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-slate-700 min-h-screen flex items-center justify-center">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

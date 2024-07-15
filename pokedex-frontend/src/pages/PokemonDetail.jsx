@@ -16,18 +16,20 @@ function PokemonDetail() {
   }, [id])
 
   if (!pokemon) {
-    return <div>Loading...</div>
+    return <span className="loading loading-dots loading-lg grid place-items-center h-screen mx-auto"></span>
   }
 
   return (
-    <div className="max-w-2xl mx-auto p-4 border rounded-lg">
+<div className="mockup-phone">
+<div className="camera"></div>
+<div className="display w-72 py-8 px-4">
       <h1 className="text-3xl font-bold mb-4">{pokemon.name}</h1>
       <img src={pokemon.details.image} alt={pokemon.name} className="mb-4" />
-      <p><strong>ID:</strong> {pokemon.id}</p>
+      <p><strong>Pokedex No:</strong> {pokemon.details.id}</p>
       <p><strong>Type:</strong> {pokemon.details.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
-      <p><strong>Height:</strong> {pokemon.height}</p>
-      <p><strong>Weight:</strong> {pokemon.weight}</p>
-      <p><strong>Base Experience:</strong> {pokemon.base_experience}</p>
+      <p><strong>Height:</strong> {pokemon.details.height}</p>
+      <p><strong>Weight:</strong> {pokemon.details.weight}</p>
+      <p><strong>Base Experience:</strong> {pokemon.details.base_experience}</p>
       <div>
         <h2 className="text-2xl font-semibold mt-4">Abilities</h2>
         <ul>
@@ -48,6 +50,7 @@ function PokemonDetail() {
           ))}
         </ul>
       </div>
+    </div>
     </div>
   )
 }
