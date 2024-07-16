@@ -6,26 +6,31 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-        try{
-        const response = await fetch("https://pokedex-backend-pi.vercel.app/pokemon");
+      try {
+        const response = await fetch(
+          "https://pokedex-backend-pi.vercel.app/pokemon"
+        );
         const data = await response.json();
         setPokemonList(data);
-        } catch (error) {
-            console.error("Error fetching data", error);
-        }
-        }
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
     fetchData();
   }, []);
 
   return (
-    <div className="py-2 flex flex-col gap-2">
-      <h1 className="text-3xl font-bold mb-4 text-center">Pokédex</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-center gap-4">
+    <div className="py-2 flex flex-col gap-4">
+      <div className="flex items-center justify-center">
+        <img
+          src="https://archives.bulbagarden.net/media/upload/4/4b/Pok%C3%A9dex_logo.png"
+          alt="Pokedex"
+          className="w-48 h-auto"
+        />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 place-items-center gap-4">
         {pokemonList.map((pokemon) => (
-          <Link
-            to={`/pokemon/${pokemon.details.id}`}
-            key={pokemon.details.id}
-          >
+          <Link to={`/pokemon/${pokemon.details.id}`} key={pokemon.details.id}>
             <Card pokemon={pokemon} />
           </Link>
         ))}

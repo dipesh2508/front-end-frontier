@@ -22,13 +22,13 @@ function PokemonDetail() {
   return (
 <div className="mockup-phone">
 <div className="camera"></div>
-<div className="display w-72 py-8 px-4">
+<div className="display w-72 py-8 px-4 bg-slate-900">
       <h1 className="text-3xl font-bold mb-4">{pokemon.name}</h1>
       <img src={pokemon.details.image} alt={pokemon.name} className="mb-4" />
       <p><strong>Pokedex No:</strong> {pokemon.details.id}</p>
       <p><strong>Type:</strong> {pokemon.details.types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
-      <p><strong>Height:</strong> {pokemon.details.height}</p>
-      <p><strong>Weight:</strong> {pokemon.details.weight}</p>
+      <p><strong>Height:</strong> {pokemon.details.height/10} m</p>
+      <p><strong>Weight:</strong> {pokemon.details.weight/10} kg</p>
       <p><strong>Base Experience:</strong> {pokemon.details.base_experience}</p>
       <div>
         <h2 className="text-2xl font-semibold mt-4">Abilities</h2>
