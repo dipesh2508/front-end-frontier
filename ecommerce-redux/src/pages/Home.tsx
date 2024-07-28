@@ -1,22 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ProductCard from '../components/ProductCard';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import ProductCard from "../components/ProductCard";
 
-interface IProduct {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
-    image: string;
-  }
+export interface IProduct {
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+  category: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
 
 const Home: React.FC = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://fakestoreapi.com/products')
-      .then(response => setProducts(response.data))
-      .catch(error => console.error(error));
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((response) => setProducts(response.data))
+      .catch((error) => console.error(error));
   }, []);
 
   return (
