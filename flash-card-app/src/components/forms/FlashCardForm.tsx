@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { apiUrl } from "@/lib/constants";
 import { IFlashcard } from "@/pages/Flashcards";
+import { DialogClose } from "../ui/dialog";
 
 const schema = z.object({
   question: z.string().min(1, "Question is required"),
@@ -60,7 +61,7 @@ const TopicForm: React.FC<IFC> = ({ flashcards, setFlashcards, topicId }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="question"
@@ -93,7 +94,12 @@ const TopicForm: React.FC<IFC> = ({ flashcards, setFlashcards, topicId }) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex gap-4">
+          <Button type="submit">Submit</Button>
+          <DialogClose asChild>
+            <Button variant={"destructive"}>Cancel</Button>
+          </DialogClose>
+        </div>
       </form>
     </Form>
   );

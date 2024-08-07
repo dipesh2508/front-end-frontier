@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,52 +12,53 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input"
-import axios from 'axios';
-import { apiUrl } from '@/lib/constants';
+import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { apiUrl } from "@/lib/constants";
+import { DialogClose } from "../ui/dialog";
 
 const schema = z.object({
-    title: z.string().min(1, "Title is required"),
+  title: z.string().min(1, "Title is required"),
 });
 
 interface ITopic {
-    topics: any;
-    setTopics: any;
+  topics: any;
+  setTopics: any;
 }
 
-const TopicForm:React.FC<ITopic> = ({topics, setTopics}) => {
-    const form = useForm<z.infer<typeof schema>>({
-        resolver: zodResolver(schema),
-        defaultValues: {
-          title: "",
-        },
-      })
+const TopicForm: React.FC<ITopic> = ({ topics, setTopics }) => {
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      title: "",
+    },
+  });
 
-    const { reset } = form;
+  const { reset } = form;
 
-    const onSubmit = async (data:any) => {
-        try {
-            const token = localStorage.getItem('token');
-            const response = await axios.post(
-              `${apiUrl}/topics`,
-              { title: data.title },
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
-            setTopics([...topics, response.data]);
+  const onSubmit = async (data: any) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `${apiUrl}/topics`,
+        { title: data.title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTopics([...topics, response.data]);
 
-            reset();
-          } catch (error:any) {
-            console.error(error.response.data);
-          }
+      reset();
+    } catch (error: any) {
+      console.error(error.response.data);
     }
+  };
 
   return (
-        <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="title"
@@ -74,10 +75,15 @@ const TopicForm:React.FC<ITopic> = ({topics, setTopics}) => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <div className="flex gap-4">
+          <Button type="submit">Submit</Button>
+          <DialogClose asChild>
+            <Button variant={"destructive"}>Cancel</Button>
+          </DialogClose>
+        </div>
       </form>
     </Form>
-  )
-}
+  );
+};
 
-export default TopicForm
+export default TopicForm;

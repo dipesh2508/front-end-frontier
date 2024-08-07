@@ -5,6 +5,8 @@ import { apiUrl } from "@/lib/constants";
 import NavBar from "@/components/shared/NavBar";
 import TopicCard from "@/components/TopicCard";
 import TopicForm from "@/components/forms/TopicForm";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 interface Topic {
   id: number;
@@ -42,8 +44,17 @@ const Topics: React.FC = () => {
     <>
       <NavBar />
       <div className="p-8">
-        <h2 className="text-2xl font-bold mb-6">Topics</h2>
-        <TopicForm topics={topics} setTopics={setTopics} />
+        <Dialog>
+          <div className="flex justify-between">
+            <h2 className="text-2xl font-bold mb-6">Topics</h2>
+            <DialogTrigger asChild>
+              <Button>Add +</Button>
+            </DialogTrigger>
+          </div>
+          <DialogContent>
+            <TopicForm topics={topics} setTopics={setTopics} />
+          </DialogContent>
+        </Dialog>
         <ul>
           {topics.map((topic) => (
             <li key={topic.id} className="mb-2">

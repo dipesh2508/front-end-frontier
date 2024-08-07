@@ -5,6 +5,8 @@ import { apiUrl } from "@/lib/constants";
 import NavBar from "@/components/shared/NavBar";
 import FlashCard from "@/components/FlashCard";
 import FlashCardForm from "@/components/forms/FlashCardForm";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export interface IFlashcard {
   id: number;
@@ -41,14 +43,21 @@ const Flashcards: React.FC = () => {
     <>
       <NavBar />
       <div className="p-8">
-        <h2 className="text-2xl font-bold mb-6">Flashcards</h2>
-        <div className="mb-4">
-          <FlashCardForm
-            flashcards={flashcards}
-            setFlashcards={setFlashcards}
-            topicId={topicId}
-          />
-        </div>
+        <Dialog>
+          <div className="flex justify-between">
+            <h2 className="text-2xl font-bold mb-6">Flashcards</h2>
+            <DialogTrigger asChild>
+              <Button>Add +</Button>
+            </DialogTrigger>
+          </div>
+          <DialogContent>
+            <FlashCardForm
+              flashcards={flashcards}
+              setFlashcards={setFlashcards}
+              topicId={topicId}
+            />
+          </DialogContent>
+        </Dialog>
         <div className="grid grid-cols-5 gap-4">
           {flashcards.map((flashcard) => (
             <FlashCard
