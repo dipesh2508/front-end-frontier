@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-
+import { apiUrl } from '@/lib/constants';
 interface Flashcard {
   id: number;
   question: string;
@@ -18,7 +18,7 @@ const Flashcards: React.FC = () => {
     const fetchFlashcards = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`/topics/${topicId}/flashcards`, {
+        const response = await axios.get(`${apiUrl}/topics/${topicId}/flashcards`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,7 +36,7 @@ const Flashcards: React.FC = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        `/topics/${topicId}/flashcards`,
+        `${apiUrl}/topics/${topicId}/flashcards`,
         { question, answer },
         {
           headers: {

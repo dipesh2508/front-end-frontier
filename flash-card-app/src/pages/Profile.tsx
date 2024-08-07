@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { apiUrl } from '@/lib/constants';
+import { useNavigate } from 'react-router-dom';
 
 interface Flashcard {
   id: number;
@@ -22,28 +24,42 @@ interface UserProfile {
 }
 
 const Profile: React.FC = () => {
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useState<UserProfile>({
+    id: 0,
+    email: '',
+    name: '',
+    topics: [],
+  });
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+  const fetchProfile = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if(!token) {
+        navigate('/login');
+      }
+      const response = await axios.get(`${apiUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProfile(response.data);
+    } catch (error:any) {
+      console.error(error.response.data);
+    }
+    finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get('/user/profile', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProfile(response.data);
-      } catch (error:any) {
-        console.error(error.response.data);
-      }
-    };
-
     fetchProfile();
   }, []);
 
-  if (!profile) return <div>Loading...</div>;
-
+  if (loading) 
+    return <div>Loading...</div>
+  else
   return (
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-6">Profile</h2>
@@ -57,7 +73,7 @@ const Profile: React.FC = () => {
           <li key={topic.id} className="mb-2">
             <p><strong>Title:</strong> {topic.title}</p>
             <ul>
-              {topic.flashcards.map((flashcard) => (
+              {topic?.flashcards?.map((flashcard) => (
                 <li key={flashcard.id} className="ml-4">
                   <p><strong>Question:</strong> {flashcard.question}</p>
                   <p><strong>Answer:</strong> {flashcard.answer}</p>

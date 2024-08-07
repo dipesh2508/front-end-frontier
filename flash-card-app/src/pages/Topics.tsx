@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { apiUrl } from '@/lib/constants';
 
 interface Topic {
   id: number;
@@ -10,12 +11,16 @@ interface Topic {
 const Topics: React.FC = () => {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [title, setTitle] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('/topics', {
+        if(!token) {
+          navigate('/login');
+        }
+        const response = await axios.get(`${apiUrl}/topics`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +38,7 @@ const Topics: React.FC = () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(
-        '/topics',
+        `${apiUrl}/topics`,
         { title },
         {
           headers: {
@@ -69,7 +74,7 @@ const Topics: React.FC = () => {
       <ul>
         {topics.map((topic) => (
           <li key={topic.id} className="mb-2">
-            <Link to={`/topics/${topic.id}`} className="text-blue-500">
+            <Link to={`/topics/${topic.id}/flashcards`} className="text-blue-500">
               {topic.title}
             </Link>
           </li>

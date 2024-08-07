@@ -1,24 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import axios from 'axios';
+import { apiUrl } from '@/lib/constants';
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().email().nonempty("Email is required"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
 });
 
 type LoginFormValues = z.infer<typeof schema>;
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+
+  const checkValidToken = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if(response.status === 200) {
+        navigate('/profile');
+      }
+
+    } catch (error:any) {
+      console.log("Invalid token");
+    }
+  }
+
+  useEffect(() => {
+    if(localStorage.getItem('token')) {
+      checkValidToken();
+    }
+  });
+
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await axios.post('/auth/login', data);
+      const response = await axios.post(`${apiUrl}/auth/login`, data);
       console.log(response.data);
       localStorage.setItem('token', response.data.token);
     } catch (error:any) {

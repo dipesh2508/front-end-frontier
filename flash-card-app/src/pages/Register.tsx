@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import axios from 'axios';
+import { apiUrl } from '@/lib/constants';
+import { useNavigate } from 'react-router-dom';
 
 const schema = z.object({
   email: z.string().email(),
@@ -13,13 +15,40 @@ const schema = z.object({
 type RegisterFormValues = z.infer<typeof schema>;
 
 const Register: React.FC = () => {
+
+  const navigate = useNavigate();
+
+  const checkValidToken = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`${apiUrl}/user/profile`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if(response.status === 200) {
+        navigate('/profile');
+      }
+
+    } catch (error:any) {
+      console.log("Invalid token");
+    }
+  }
+
+  useEffect(() => {
+    if(localStorage.getItem('token')) {
+      checkValidToken();
+    }
+  });
+
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormValues>({
     resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: RegisterFormValues) => {
     try {
-      const response = await axios.post('/auth/register', data);
+      const response = await axios.post(`${apiUrl}/auth/register`, data);
       console.log(response.data);
     } catch (error:any) {
       console.error(error.response.data);
