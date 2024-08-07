@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { apiUrl } from '@/lib/constants';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '@/components/shared/NavBar';
 
 interface Flashcard {
   id: number;
@@ -61,6 +62,8 @@ const Profile: React.FC = () => {
     return <div>Loading...</div>
   else
   return (
+<>
+      <NavBar />
     <div className="p-8">
       <h2 className="text-2xl font-bold mb-6">Profile</h2>
       <div className="mb-4">
@@ -84,6 +87,7 @@ const Profile: React.FC = () => {
         ))}
       </ul>
     </div>
+    </>
   );
 };
 

@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { apiUrl } from '@/lib/constants';
-interface Flashcard {
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { apiUrl } from "@/lib/constants";
+import NavBar from "@/components/shared/NavBar";
+import FlashCard from "@/components/FlashCard";
+import FlashCardForm from "@/components/forms/FlashCardForm";
+
+export interface IFlashcard {
   id: number;
   question: string;
   answer: string;
@@ -10,21 +14,22 @@ interface Flashcard {
 
 const Flashcards: React.FC = () => {
   const { topicId } = useParams<{ topicId: string }>();
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
-  const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [flashcards, setFlashcards] = useState<IFlashcard[]>([]);
 
   useEffect(() => {
     const fetchFlashcards = async () => {
       try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(`${apiUrl}/topics/${topicId}/flashcards`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${apiUrl}/topics/${topicId}/flashcards`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setFlashcards(response.data);
-      } catch (error:any) {
+      } catch (error: any) {
         console.error(error.response.data);
       }
     };
@@ -32,60 +37,29 @@ const Flashcards: React.FC = () => {
     fetchFlashcards();
   }, [topicId]);
 
-  const handleCreateFlashcard = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${apiUrl}/topics/${topicId}/flashcards`,
-        { question, answer },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setFlashcards([...flashcards, response.data]);
-      setQuestion('');
-      setAnswer('');
-    } catch (error:any) {
-      console.error(error.response.data);
-    }
-  };
-
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Flashcards</h2>
-      <div className="mb-4">
-        <input
-          type="text"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          className="p-2 border border-gray-300 rounded mb-2 w-full"
-          placeholder="Question"
-        />
-        <input
-          type="text"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          className="p-2 border border-gray-300 rounded mb-2 w-full"
-          placeholder="Answer"
-        />
-        <button
-          onClick={handleCreateFlashcard}
-          className="p-2 bg-blue-500 text-white rounded w-full"
-        >
-          Add Flashcard
-        </button>
+    <>
+      <NavBar />
+      <div className="p-8">
+        <h2 className="text-2xl font-bold mb-6">Flashcards</h2>
+        <div className="mb-4">
+          <FlashCardForm
+            flashcards={flashcards}
+            setFlashcards={setFlashcards}
+            topicId={topicId}
+          />
+        </div>
+        <div className="grid grid-cols-5 gap-4">
+          {flashcards.map((flashcard) => (
+            <FlashCard
+              question={flashcard.question}
+              answer={flashcard.answer}
+              key={flashcard.id}
+            />
+          ))}
+        </div>
       </div>
-      <ul>
-        {flashcards.map((flashcard) => (
-          <li key={flashcard.id} className="mb-4">
-            <p><strong>Question:</strong> {flashcard.question}</p>
-            <p><strong>Answer:</strong> {flashcard.answer}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 };
 

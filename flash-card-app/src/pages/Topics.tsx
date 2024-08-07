@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { apiUrl } from '@/lib/constants';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl } from "@/lib/constants";
+import NavBar from "@/components/shared/NavBar";
+import TopicCard from "@/components/TopicCard";
+import TopicForm from "@/components/forms/TopicForm";
 
 interface Topic {
   id: number;
@@ -10,15 +13,15 @@ interface Topic {
 
 const Topics: React.FC = () => {
   const [topics, setTopics] = useState<Topic[]>([]);
-  const [title, setTitle] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        const token = localStorage.getItem('token');
-        if(!token) {
-          navigate('/login');
+        const token = localStorage.getItem("token");
+        if (!token) {
+          navigate("/login");
         }
         const response = await axios.get(`${apiUrl}/topics`, {
           headers: {
@@ -26,61 +29,35 @@ const Topics: React.FC = () => {
           },
         });
         setTopics(response.data);
-      } catch (error:any) {
+      } catch (error: any) {
         console.error(error.response.data);
       }
     };
 
     fetchTopics();
+    console.log(topics);
   }, []);
 
-  const handleCreateTopic = async () => {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await axios.post(
-        `${apiUrl}/topics`,
-        { title },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setTopics([...topics, response.data]);
-      setTitle('');
-    } catch (error:any) {
-      console.error(error.response.data);
-    }
-  };
-
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-6">Topics</h2>
-      <div className="mb-4">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="p-2 border border-gray-300 rounded mb-2 w-full"
-          placeholder="New Topic"
-        />
-        <button
-          onClick={handleCreateTopic}
-          className="p-2 bg-blue-500 text-white rounded w-full"
-        >
-          Add Topic
-        </button>
+    <>
+      <NavBar />
+      <div className="p-8">
+        <h2 className="text-2xl font-bold mb-6">Topics</h2>
+        <TopicForm topics={topics} setTopics={setTopics} />
+        <ul>
+          {topics.map((topic) => (
+            <li key={topic.id} className="mb-2">
+              <Link
+                to={`/topics/${topic.id}/flashcards`}
+                className="text-blue-500"
+              >
+                <TopicCard title={topic.title} />
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul>
-        {topics.map((topic) => (
-          <li key={topic.id} className="mb-2">
-            <Link to={`/topics/${topic.id}/flashcards`} className="text-blue-500">
-              {topic.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    </>
   );
 };
 
